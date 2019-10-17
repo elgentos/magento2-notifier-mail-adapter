@@ -1,0 +1,17 @@
+{
+  "name": "elgentos/module-notifier-mail-adapter",
+  "description": "Magento mail adapter for MSP Notifier",
+  "require": {
+    "msp/module-notifier-all": "^0.1.12"
+  },
+  "type": "magento2-module",
+  "license": "OSL-3.0",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Elgentos\\NotifierMagentoMailAdapter\\": ""
+    }
+  }
+}

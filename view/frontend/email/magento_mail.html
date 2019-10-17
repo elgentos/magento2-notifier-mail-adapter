@@ -1,0 +1,30 @@
+<!--@subject Magento Mail @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tr>
+        <td align="center" valign="top" style="padding:20px 0 20px 0">
+            <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+                <tr>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" border="0" width="650">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" valign="top" style="font-size:12px;padding:7px 9px 9px 9px;border:1px solid #EAEAEA;">
+                                        Your custom mail template with vars:
+                                    </td>
+                                    <td colspan="2" valign="top" style="font-size:12px;padding:7px 9px 9px 9px;border:1px solid #EAEAEA;">
+                                        {{var templatevar}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

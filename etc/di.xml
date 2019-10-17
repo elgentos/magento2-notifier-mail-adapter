@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Elgentos\NotifierMagentoMailAdapter\Api\SendMessageInterface" type="Elgentos\NotifierMagentoMailAdapter\Model\SendMessage"/>
+
+    <type name="MSP\Notifier\Model\AdapterRepository">
+        <arguments>
+            <argument name="adapters" xsi:type="array">
+                <item name="magento_mail" xsi:type="object">Elgentos\NotifierMagentoMailAdapter\Model\Adapter\MagentoMail</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Magento Mail adapter -->
+    <virtualType name="Elgentos\NotifierMagentoMailAdapter\Model\Adapter\MagentoMail" type="MSP\Notifier\Model\Adapter">
+        <arguments>
+            <argument name="engine" xsi:type="object">Elgentos\NotifierMagentoMailAdapter\Model\AdapterEngine\MagentoMail</argument>
+            <argument name="validatorChain" xsi:type="object">Elgentos\NotifierMagentoMailAdapter\Model\AdapterEngine\ValidatorChain\MagentoMail</argument>
+            <argument name="code" xsi:type="string">magento_mail</argument>
+            <argument name="name" xsi:type="string">Magento Mail</argument>
+            <argument name="description" xsi:type="string">Magento Mail</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Magento Mail validators -->
+    <virtualType name="Elgentos\NotifierMagentoMailAdapter\Model\AdapterEngine\ParamsValidator\MagentoMail\Required" type="MSP\Notifier\Model\AdapterEngine\ParamsValidator\Required">
+        <arguments>
+            <argument name="requiredParams" xsi:type="array">
+                <item name="from" xsi:type="string">from</item>
+                <item name="from_name" xsi:type="string">from_name</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Magento Mail validators pool -->
+    <virtualType name="Elgentos\NotifierMagentoMailAdapter\Model\AdapterEngine\ValidatorChain\MagentoMail" type="MSP\Notifier\Model\AdapterEngine\ValidatorChain">
+        <arguments>
+            <argument name="paramsValidators" xsi:type="array">
+                <item name="required" xsi:type="object">Elgentos\NotifierMagentoMailAdapter\Model\AdapterEngine\ParamsValidator\MagentoMail\Required</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MSP\Notifier\Ui\DataProvider\Form\Channel\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="magento_mail" xsi:type="array">
+                    <item name="class" xsi:type="string">Elgentos\NotifierMagentoMailAdapter\Ui\DataProvider\Form\Channel\Modifier\MagentoMail</item>
+                    <item name="sortOrder" xsi:type="number">1000</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="message" xsi:type="object">Elgentos\NotifierMagentoMailAdapter\Console\Command\MessageTestCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>
